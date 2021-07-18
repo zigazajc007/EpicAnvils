@@ -1,0 +1,7 @@
+name: EpicAnvils
+version: ${project.version}
+main: com.rabbitcompany.epicanvils.EpicAnvils
+api-version: 1.13
+authors: [ Black1_TV ]
+description: Enchant items with unsafe enchanted books
+website: rabbit-company.com
