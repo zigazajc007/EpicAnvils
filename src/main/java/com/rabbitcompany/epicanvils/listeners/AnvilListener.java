@@ -3,7 +3,9 @@ package com.rabbitcompany.epicanvils.listeners;
 import com.rabbitcompany.epicanvils.EpicAnvils;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.PrepareAnvilEvent;
 import org.bukkit.inventory.ItemStack;
@@ -19,7 +21,7 @@ public class AnvilListener implements Listener {
         Bukkit.getPluginManager().registerEvents(this, plugin);
     }
 
-    @EventHandler
+    @EventHandler(priority = EventPriority.HIGHEST)
     public void onAnvilChange(PrepareAnvilEvent event){
         ItemStack item = event.getInventory().getItem(0);
         ItemStack enchantingBook = event.getInventory().getItem(1);
@@ -32,7 +34,15 @@ public class AnvilListener implements Listener {
         if(meta.isUnbreakable()){
             if(finalItem.getItemMeta() != null) finalItem.getItemMeta().setUnbreakable(true);
         }
+
         finalItem.addUnsafeEnchantments(meta.getStoredEnchants());
+
+        if(finalItem.getType() == Material.ENCHANTED_BOOK){
+            for(Enchantment enc : finalItem.getEnchantments().keySet()){
+                finalItem.removeEnchantment(enc);
+            }
+        }
+
         event.setResult(finalItem);
     }
 }
