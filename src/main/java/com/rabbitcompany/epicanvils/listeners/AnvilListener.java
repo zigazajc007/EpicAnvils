@@ -26,6 +26,7 @@ public class AnvilListener implements Listener {
         ItemStack item = event.getInventory().getItem(0);
         ItemStack enchantingBook = event.getInventory().getItem(1);
         if(item == null || enchantingBook == null) return;
+        if(item.getType() == Material.ENCHANTED_BOOK) return;
         if(enchantingBook.getType() != Material.ENCHANTED_BOOK) return;
         if(!(enchantingBook.getItemMeta() instanceof EnchantmentStorageMeta)) return;
         EnchantmentStorageMeta meta = (EnchantmentStorageMeta) enchantingBook.getItemMeta();
